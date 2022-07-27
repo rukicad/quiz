@@ -36,16 +36,30 @@
             @endif
             <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-             {{ $slot }}  
+    @if($errors->any())
+      <div class="alert alert-danger">
+       @foreach($errors->all() as $error)
+         <li>{{$error}}</li>
+        @endforeach
+     </div>
+     @endif  
+
+     @if(session('success'))
+        <div class="alert alert-success">
+          <i class="fa fa-check"></i>
+          {{session('success')}}
         </div>
-        </div>
-       </div>
+      @endif
+       {{$slot}}
+     </div>
+      </div>
          
     </div>
 
         @stack('modals')
-        {{ $js }}
+        @isset($js)
+          {{ $js }}
+        @endif
         @livewireScripts 
          <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
