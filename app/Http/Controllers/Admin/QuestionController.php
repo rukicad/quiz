@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Quiz;
+use App\Http\Requests\QuestionCreateRequest;
 
 class QuestionController extends Controller
 {
@@ -24,9 +25,10 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($quiz_id)
+    public function create($id)
     {
-        return $quiz_id;
+        $quiz = Quiz::find($id);
+        return view('admin.question.create',compact('quiz'));
     }
 
     /**
@@ -35,9 +37,9 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(QuestionCreateRequest $request)
     {
-        //
+        return $request->post();
     }
 
     /**
@@ -46,7 +48,7 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($quiz_id,$id)
+    public function show($id)
     {
         return $quiz_id.' - '. $id;
     }
