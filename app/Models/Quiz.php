@@ -10,4 +10,7 @@ class Quiz extends Model
     use HasFactory;
 
     protected $fillable=['title','description','finished_at'];
+    public function questions(){
+        return $this->hasMany('App\Models\Question');
+    }
 }
