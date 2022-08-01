@@ -2,7 +2,7 @@
     <x-slot name="header">{{$quiz->title}} için yeni soru oluştur</x-slot>
     <div class = "card">
         <div class="card-body">
-            <form method="POST" action=" {{route('questions.store',$quiz->id)}} ">
+            <form method="POST" action=" {{route('questions.store',$quiz->id)}} " enctype="multipart/form-data">
                 @csrf
                 <div class="form-group">
                     <label>Soru</label>
@@ -42,10 +42,10 @@
                 <div class="form-group">
                   <label>Doğru Cevap</label>
                   <select name="correct_answer" class="form-control">
-                    <option value="answer1">1. Cevap</option>
-                    <option value="answer2">2. Cevap</option>
-                    <option value="answer3">3. Cevap</option>
-                    <option value="answer4">4. Cevap</option>
+                    <option @if(old('correct_answer')==='answer1') selected @endif value="answer1">1. Cevap</option>
+                    <option @if(old('correct_answer')==='answer2') selected @endif value="answer2">2. Cevap</option>
+                    <option @if(old('correct_answer')==='answer3') selected @endif value="answer3">3. Cevap</option>
+                    <option @if(old('correct_answer')==='answer4') selected @endif value="answer4">4. Cevap</option>
                   </select>
                 </div><br>
 
