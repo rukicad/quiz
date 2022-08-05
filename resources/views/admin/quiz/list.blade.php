@@ -23,17 +23,20 @@
       <td> 
            @switch($quiz->status)
            @case('publish')
-               <span class="badge badge-success">Aktif</span> 
+               <span class="btn btn-success">Aktif</span> 
            @break
            @case('passive')
-                <span class="badge badge-danger">Pasif</span>
+                <span class="btn btn-danger" >Pasif</span>
            @break 
            @case('draft')
-                <span class="badge badge-warning">Taslak</span>
+                <span class="btn btn-warning">Taslak</span>
            @break
            @endswitch
       </td>
-      <td> {{$quiz->finished_at}} </td>
+      <td>
+        <span title="{{$quiz->finished_at}}">
+          {{$quiz->finished_at ? $quiz->finished_at->diffForHumans() : '-'}} </span>
+      </td>
       <td>
         <a href=" {{route('questions.index',$quiz->id)}} " class="btn btn-sm btn-warning">
           <i class="fa fa-question"></i></a>

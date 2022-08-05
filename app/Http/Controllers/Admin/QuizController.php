@@ -63,7 +63,7 @@ class QuizController extends Controller
      */
     public function edit($id)
     {
-        $quiz = Quiz::find($id) ?? abort(404,'Quiz Bulunamadı');
+        $quiz = Quiz::withCount('questions')->find($id) ?? abort(404,'Quiz Bulunamadı');
         return view('admin.quiz.edit',compact('quiz'));
     }
 

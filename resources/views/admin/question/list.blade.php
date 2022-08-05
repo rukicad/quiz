@@ -2,12 +2,16 @@
     <x-slot name="header">{{$quiz->title}} Quizine ait sorular</x-slot>
     <div class="card">
         <div class="card-body">
+            <h5 class= "card-title float-right">
+                <a href="{{route('questions.create',$quiz->id)}}" class="btn btn-sm btn-primary"style="float:right;"><i class="fa fa-plus"><br></i>Soru Oluştur</a>
+            </h5>
             <h5 class= "card-title">
-                <a href="{{route('questions.create',$quiz->id)}}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Soru Oluştur</a>
+                <a href="{{route('quizzes.index')}}" class="btn btn-sm btn-secondary"><i class="fa fa-arrow-left"></i>
+                Quizlere Dön</a>
             </h5>
                 <table class="table table-bordered table-sm">
-  <thead>
-    <tr>
+            <thead>
+     <tr>
       <th scope="col">Soru</th>
       <th scope="col">Fotoğraf</th>
       <th scope="col">1. cevap</th>
@@ -16,7 +20,7 @@
       <th scope="col">4. cevap</th>
       <th scope="col">Doğru cevap</th>
       <th scope="col" style="width:140px;">İşlemler</th>
-    </tr>
+     </tr>
     @foreach($quiz->questions as $question)
     <tr>
       <td> {{ $question->question }} </td>
