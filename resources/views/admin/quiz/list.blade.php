@@ -2,11 +2,33 @@
     <x-slot name="header">Quizler</x-slot>
     <div class="card">
         <div class="card-body">
-            <h5 class= "card-title">
-                <a href="{{route('quizzes.create')}}" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i>Quiz Oluştur</a>
+        <h5 class= "card-title float-right"> <br></br>
+                <a href="{{route('quizzes.create')}}" class="btn btn-sm btn-primary" style="float:right" ><i class="fa fa-plus"></i>
+                Quiz Oluştur</a>
             </h5>
-                <table class="table table-bordered">
-  <thead>
+              <form method="GET" action="">
+                <div class="form-row">
+                <div class="col-md-4">
+                  <input type="text" name="title" value="{{ request()->get('title') }}" placeholder="Quiz Adı" class="form-control">
+                </div>
+                <div class="col-md-4">
+                  <select class="form-control" onchange="this.form.submit()" name="status" style="float:right">
+                    <option value="">Durum Seçiniz</option>
+                    <option @if(request()->get('status')=='publish') selected @endif value="publish">Aktif</option>
+                    <option @if(request()->get('status')=='passive') selected @endif value="passive">Pasif</option>
+                    <option @if(request()->get('status')=='draft') selected @endif value="draft">Taslak</option>
+                  </select>  
+                <br></br>
+                </div>
+                @if(request()->get('title') || request()->get('status'))
+                  <div class="col-md-2">
+                  <a href="{{route('quizzes.index')}}" class="btn btn-secondary btn-sm">Sıfırla</a>
+                  </div>
+                @endif
+                </div>
+              </form>
+      <table class="table table-bordered">
+      <thead><br>
     <tr>
       <th scope="col">Quiz</th>
       <th scope="col">Soru Sayısı</th>
@@ -47,7 +69,7 @@
     @endforeach
 </tbody>
 </table>
-      <td>{{$quizzes->links()}}</td>
+      <td>{{$quizzes->withQueryString()->links()}}</td>
         </div>
     </div>
 </x-app-layout>
